@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../api';
+import { Link } from 'react-router-dom';
 
 function GameStreams({ match, location }) {
   const [streamData, setStreamData] = useState([]);
@@ -39,29 +40,35 @@ function GameStreams({ match, location }) {
         {streamData.map(stream => (
           <div className="col-xl-4 col-lg-6 col-md-6 col-sm-12 mt-4">
             <div className="container-fluid d-flex flex-column overflow-hidden">
-              <a
+              <Link
                 className="link"
-                href={'https://twitch.tv/' + stream.user_name}
-                target="_blank"
-                rel="noopener noreferrer"
+                to={{
+                  pathname: 'stream/' + stream.user_name,
+                  state: {
+                    streamID: stream.user_id
+                  }
+                }}
               >
                 <img
                   className="stream-img"
                   src={stream.thumbnail_url}
                   alt="stream-thumbnail"
                 />
-              </a>
+              </Link>
               <div className="stream-text">
-                <a
+                <Link
                   className="link"
-                  href={'https://twitch.tv/' + stream.user_name}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  to={{
+                    pathname: 'stream/' + stream.user_name,
+                    state: {
+                      streamID: stream.user_id
+                    }
+                  }}
                 >
                   <h4 className="text-center text-white mt-2">
                     {stream.user_name} -{stream.viewer_count} viewers
                   </h4>
-                </a>
+                </Link>
                 <h6 className="text-white">{stream.title}</h6>
               </div>
             </div>

@@ -1,3 +1,15 @@
+.stream-page {
+  height: 88.5vh;
+}
+
+.stream-page h3 {
+  margin: 1rem auto;
+  width: 75%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .App {
   text-align: center;
   background: #222;

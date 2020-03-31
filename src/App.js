@@ -7,6 +7,7 @@ import Games from './components/Games';
 import Header from './components/Header';
 import Streams from './components/Streams';
 import GameStreams from './components/GameStreams';
+import Stream from './components/Stream';
 
 function App() {
   return (
@@ -16,6 +17,8 @@ function App() {
         <Route exact path="/" component={Games} />
         <Route exact path="/top-streams" component={Streams} />
         <Route exact path="/game/:id" component={GameStreams} />
+        <Route exact path="/game/stream/:id" component={Stream} />
+        <Route exact path="/top-streams/stream/:id" component={Stream} />
       </div>
     </Router>
   );

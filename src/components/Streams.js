@@ -61,30 +61,36 @@ function Streams({ match, location }) {
         {channels.map(stream => (
           <div className="col-xl-4 col-lg-6 col-md-6 col-sm-12 mt-4">
             <div className="container d-flex flex-column overflow-hidden">
-              <a
-                href={'https://twitch.tv/' + stream.user_name}
+              <Link
                 className="link"
-                target="_blank"
-                rel="noopener noreferrer"
+                to={{
+                  pathname: 'top-streams/stream/' + stream.user_name,
+                  state: {
+                    streamID: stream.user_id
+                  }
+                }}
               >
                 <img
                   className="stream-img"
                   src={stream.thumbnail_url}
                   alt="stream_thumbnail"
                 />
-              </a>
+              </Link>
               <div className="stream-text">
-                <a
-                  href={'https://twitch.tv/' + stream.user_name}
+                <Link
                   className="link"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  to={{
+                    pathname: 'top-streams/stream/' + stream.user_name,
+                    state: {
+                      streamID: stream.user_id
+                    }
+                  }}
                 >
                   <h4 className="text-center text-white mt-2">
                     <span className="text-purple">{stream.user_name}</span> -
                     {stream.viewer_count} viewers
                   </h4>
-                </a>
+                </Link>
                 <Link
                   className="link"
                   to={{
