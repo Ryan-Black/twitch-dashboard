@@ -7,10 +7,13 @@ function Streams({ match, location }) {
   const [viewers, setViewers] = useState(0);
 
   useEffect(() => {
+    //connects to the twitch api
     const fetchData = async () => {
+      //returns the 100 most viewed streams on the site
       const result = await api.get(
         'https://api.twitch.tv/helix/streams?first=100'
       );
+      //stores data from api request
       let dataArray = result.data.data;
       let gameIDs = dataArray.map(stream => {
         return stream.game_id;
@@ -26,6 +29,7 @@ function Streams({ match, location }) {
       let gameNames = await api.get(finalURL);
       let gameNameArray = gameNames.data.data;
 
+      //gets the game name for each of the top viewed streams
       let finalArray = dataArray.map(stream => {
         stream.gameName = '';
         gameNameArray.map(name => {
@@ -34,6 +38,7 @@ function Streams({ match, location }) {
           }
         });
 
+        //changes the dimensions of the thumbnail for each stream
         let newURL = stream.thumbnail_url
           .replace('{width}', '500')
           .replace('{height}', '250');
@@ -41,6 +46,7 @@ function Streams({ match, location }) {
         return stream;
       });
 
+      //adds up the viewers for each stream to get a total
       let totalViewers = finalArray.reduce((acc, val) => {
         return acc + val.viewer_count;
       }, 0);

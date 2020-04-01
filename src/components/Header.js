@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function Header() {
   return (
@@ -18,6 +18,11 @@ function Header() {
         <li className="nav-item nav-link">
           <NavLink className="link" to="/top-streams">
             Streams
+          </NavLink>
+        </li>
+        <li className="nav-item nav-link">
+          <NavLink className="link" to="/search">
+            Search
           </NavLink>
         </li>
       </div>

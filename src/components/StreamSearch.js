@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import api from '../api';
 
-function Stream({ match, location }) {
+function StreamSearch({ match, location }) {
   const [streamData, setStreamData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  //retrieves search term
+  const handleChange = event => {
+    setSearchTerm(event.target.value);
+  };
 
   useEffect(() => {
-    //connects to twitch api
+    //connects to twitch api and retrieves stream with the username that was searched for
     const fetchData = async () => {
       const res = await api.get(
-        `https://api.twitch.tv/helix/streams?user_id=${location.state.streamID}`
+        `https://api.twitch.tv/helix/streams?user_login=${searchTerm}`
       );
       //stores the data
       let dataArray = res.data.data;
@@ -23,13 +29,20 @@ function Stream({ match, location }) {
       setStreamData(finalArray);
     };
     fetchData();
-  });
+  }, [searchTerm]);
 
   return (
     <div className="stream-page">
+      <input
+        type="text"
+        placeholder="Search"
+        value={searchTerm}
+        onChange={handleChange}
+        className="search-box"
+      />
       {streamData.map(stream => (
         <div className="stream-info">
-          <h1 className="text-purple mt-4">{match.params.id}</h1>
+          <h1 className="text-purple mt-4">{stream.user_name}</h1>
           <h3 className="text-center text-white">
             <strong className="text-purple">{stream.viewer_count}</strong>{' '}
             Viewers
@@ -46,8 +59,8 @@ function Stream({ match, location }) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <h4 className="text-center text-white mt-5">
-              Click here to head to {match.params.id}'s stream
+            <h4 className="text-center text-white mt-4">
+              Click here to head to {stream.user_name}'s stream
             </h4>
           </a>
         </div>
@@ -56,4 +69,4 @@ function Stream({ match, location }) {
   );
 }
 
-export default Stream;
+export default StreamSearch;

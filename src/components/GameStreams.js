@@ -7,11 +7,15 @@ function GameStreams({ match, location }) {
   const [viewers, setViewers] = useState(0);
 
   useEffect(() => {
+    //connects to twitch api
     const fetchData = async () => {
       const res = await api.get(
+        //gets the first 100 streams for specified game
         `https://api.twitch.tv/helix/streams?game_id=${location.state.gameID}&first=100`
       );
+      //stores data from api request
       let dataArray = res.data.data;
+      //changes the dimensions of each stream thumbnail
       let finalArray = dataArray.map(stream => {
         let newURL = stream.thumbnail_url
           .replace('{width}', '500')
@@ -20,6 +24,7 @@ function GameStreams({ match, location }) {
         return stream;
       });
 
+      //adds up the viewers for each of the 100 streams
       let totalViewers = finalArray.reduce((acc, val) => {
         return acc + val.viewer_count;
       }, 0);

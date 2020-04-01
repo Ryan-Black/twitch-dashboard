@@ -1,5 +1,5 @@
-.stream-page {
-  height: 88.5vh;
+html {
+  background: #222;
 }
 
 .stream-page h3 {
@@ -45,4 +45,27 @@
 
 .text-purple {
   color: #9146ff;
+}
+
+.search-box {
+  border: 0;
+  background: none;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  border: 2px solid #9146ff;
+  padding: 0.2rem;
+  width: 13rem;
+  outline: none;
+  color: #fff;
+  border-radius: 1.5rem;
+  transition: 0.25s;
+}
+
+.search-box::placeholder {
+  color: #fff;
+}
+
+.search-box:focus {
+  width: 16rem;
 }

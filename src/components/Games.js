@@ -6,12 +6,15 @@ function Games() {
   const [games, setGames] = useState([]);
 
   useEffect(() => {
+    //connects to the twitch api
     const fetchData = async () => {
       const res = await api.get(
+        //gets the 100 most viewed games
         'https://api.twitch.tv/helix/games/top?first=100'
       );
-
+      //stores data from api request
       let dataArray = res.data.data;
+      //changes the dimensions of each game box art
       let finalArray = dataArray.map(game => {
         let newURL = game.box_art_url
           .replace('{width}', '250')
