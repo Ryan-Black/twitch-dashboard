@@ -36,7 +36,7 @@ function Stream({ match, location }) {
           </h3>
           <h3 className="text-white">{stream.title}</h3>
           <img
-            className="stream-img"
+            className="stream-img img-fluid"
             src={stream.thumbnail_url}
             alt="stream-thumbnail"
           />
