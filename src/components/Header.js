@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 function Header() {
   return (
-    <nav className="navbar justify-content-around mb-2">
+    <nav className="navbar justify-content-around mb-2 sticky-top">
       <div>
         <NavLink className="title-link" to="">
           <h4 className="text-purple pt-3">TwitchDashboard</h4>

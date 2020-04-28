@@ -6,7 +6,7 @@ function StreamSearch({ match, location }) {
   const [searchTerm, setSearchTerm] = useState('');
 
   //retrieves search term
-  const handleChange = event => {
+  const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
@@ -19,7 +19,7 @@ function StreamSearch({ match, location }) {
       //stores the data
       let dataArray = res.data.data;
       //changes the dimensions of the stream thumbnail
-      let finalArray = dataArray.map(stream => {
+      let finalArray = dataArray.map((stream) => {
         let newURL = stream.thumbnail_url
           .replace('{width}', '1100')
           .replace('{height}', '550');
@@ -40,7 +40,7 @@ function StreamSearch({ match, location }) {
         onChange={handleChange}
         className="search-box"
       />
-      {streamData.map(stream => (
+      {streamData.map((stream) => (
         <div className="stream-info">
           <h1 className="text-purple mt-4">{stream.user_name}</h1>
           <h3 className="text-center text-white">

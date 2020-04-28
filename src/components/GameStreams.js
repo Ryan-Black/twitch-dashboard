@@ -16,7 +16,7 @@ function GameStreams({ match, location }) {
       //stores data from api request
       let dataArray = res.data.data;
       //changes the dimensions of each stream thumbnail
-      let finalArray = dataArray.map(stream => {
+      let finalArray = dataArray.map((stream) => {
         let newURL = stream.thumbnail_url
           .replace('{width}', '500')
           .replace('{height}', '250');
@@ -42,7 +42,7 @@ function GameStreams({ match, location }) {
         <strong className="text-purple">{viewers}</strong> Viewers
       </h3>
       <div className="row">
-        {streamData.map(stream => (
+        {streamData.map((stream) => (
           <div className="col-xl-4 col-lg-6 col-md-6 col-sm-12 mt-4">
             <div className="container-fluid d-flex flex-column overflow-hidden">
               <Link
@@ -50,8 +50,8 @@ function GameStreams({ match, location }) {
                 to={{
                   pathname: 'stream/' + stream.user_name,
                   state: {
-                    streamID: stream.user_id
-                  }
+                    streamID: stream.user_id,
+                  },
                 }}
               >
                 <img
@@ -59,6 +59,11 @@ function GameStreams({ match, location }) {
                   src={stream.thumbnail_url}
                   alt="stream-thumbnail"
                 />
+                <div className="stream-overlay text-center">
+                  <div className="stream-overlay-items">
+                    <p>{stream.viewer_count} viewers</p>
+                  </div>
+                </div>
               </Link>
               <div className="stream-text">
                 <Link
@@ -66,12 +71,12 @@ function GameStreams({ match, location }) {
                   to={{
                     pathname: 'stream/' + stream.user_name,
                     state: {
-                      streamID: stream.user_id
-                    }
+                      streamID: stream.user_id,
+                    },
                   }}
                 >
                   <h4 className="text-center text-white mt-2">
-                    {stream.user_name} -{stream.viewer_count} viewers
+                    {stream.user_name}
                   </h4>
                 </Link>
                 <h6 className="text-white">{stream.title}</h6>

@@ -15,13 +15,13 @@ function Streams({ match, location }) {
       );
       //stores data from api request
       let dataArray = result.data.data;
-      let gameIDs = dataArray.map(stream => {
+      let gameIDs = dataArray.map((stream) => {
         return stream.game_id;
       });
 
       let baseURL = 'https://api.twitch.tv/helix/games?';
       let queryParams = '';
-      gameIDs.map(id => {
+      gameIDs.map((id) => {
         return (queryParams = queryParams + `id=${id}&`);
       });
 
@@ -30,9 +30,9 @@ function Streams({ match, location }) {
       let gameNameArray = gameNames.data.data;
 
       //gets the game name for each of the top viewed streams
-      let finalArray = dataArray.map(stream => {
+      let finalArray = dataArray.map((stream) => {
         stream.gameName = '';
-        gameNameArray.map(name => {
+        gameNameArray.map((name) => {
           if (stream.game_id === name.id) {
             return (stream.gameName = name.name);
           }
@@ -64,7 +64,7 @@ function Streams({ match, location }) {
         <strong className="text-purple">{viewers}</strong> Viewers
       </h3>
       <div className="row">
-        {channels.map(stream => (
+        {channels.map((stream) => (
           <div className="col-xl-4 col-lg-6 col-md-6 col-sm-12 mt-4">
             <div className="container d-flex flex-column overflow-hidden">
               <Link
@@ -72,8 +72,8 @@ function Streams({ match, location }) {
                 to={{
                   pathname: 'top-streams/stream/' + stream.user_name,
                   state: {
-                    streamID: stream.user_id
-                  }
+                    streamID: stream.user_id,
+                  },
                 }}
               >
                 <img
@@ -81,6 +81,11 @@ function Streams({ match, location }) {
                   src={stream.thumbnail_url}
                   alt="stream_thumbnail"
                 />
+                <div className="stream-overlay text-center">
+                  <div className="stream-overlay-items">
+                    <p>{stream.viewer_count} viewers</p>
+                  </div>
+                </div>
               </Link>
               <div className="stream-text">
                 <Link
@@ -88,13 +93,12 @@ function Streams({ match, location }) {
                   to={{
                     pathname: 'top-streams/stream/' + stream.user_name,
                     state: {
-                      streamID: stream.user_id
-                    }
+                      streamID: stream.user_id,
+                    },
                   }}
                 >
                   <h4 className="text-center text-white mt-2">
-                    <span className="text-purple">{stream.user_name}</span> -
-                    {stream.viewer_count} viewers
+                    {stream.user_name}
                   </h4>
                 </Link>
                 <Link
@@ -102,8 +106,8 @@ function Streams({ match, location }) {
                   to={{
                     pathname: 'game/' + stream.gameName,
                     state: {
-                      gameID: stream.game_id
-                    }
+                      gameID: stream.game_id,
+                    },
                   }}
                 >
                   <h6 className="text-center text-purple">
